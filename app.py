@@ -4,7 +4,7 @@ import validators
 
 app = Flask(__name__)
 
-# When user click download it will execute
+# When user click "download" it will execute
 @app.route("/submit", methods=['POST'])
 def submit():
     # Get the input[type="url" name="link"] value
