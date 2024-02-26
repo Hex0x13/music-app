@@ -5,17 +5,22 @@ import os
 
 app = Flask(__name__)
 
+# For Spotify API authentication
 client_id = os.getenv('CLIENT_ID')
 client_secret = os.getenv('CLIENT_SECRET')
 
+# When user click download it will execute
 @app.route("/submit", methods=['POST'])
 def submit():
+    # Get the input[type="url" name="link"] value
     link = request.form.get('link')
+
+    # Check if link is a valid url, if not it will redirect to index.html
     if not validators.url(link) or link == '':
         return redirect(url_for('index'))
     return f'Submititted link: {link}'
 
-
+# When user request for index.html, this is the response
 @app.route("/")
 def index():
     return  render_template('index.html')
