@@ -1,13 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 import validators
-from dotenv import load_dotenv
-import os
+
 
 app = Flask(__name__)
-
-# For Spotify API authentication
-client_id = os.getenv('CLIENT_ID')
-client_secret = os.getenv('CLIENT_SECRET')
 
 # When user click download it will execute
 @app.route("/submit", methods=['POST'])
