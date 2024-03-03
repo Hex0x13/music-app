@@ -1,6 +1,6 @@
 from flask import Flask, request
 from flask import render_template, redirect, url_for
-import validators
+import validators, json
 from spotify_api import SpotifyAPI
 
 
@@ -20,7 +20,10 @@ def submit():
     if not validators.url(link) or link == '':
         return redirect(url_for('index'))
     playlist_id = link.split("/")[-1]
-    return spotify_api.get_playlists(playlist_id)
+    playlist = spotify_api.get_playlists(playlist_id)
+    with open("observe.json", "w") as file:
+        json.dump(playlist, file)
+    return render_template('response.html', playlist=playlist)
 
 # When user request for index.html, this is the response
 @app.route("/")

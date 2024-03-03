@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response</title>
+    <style>
+        img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        {% for item in playlist['items'] %}
+            <li class="item">
+                <img src="{{ item['track']['album']['images'][0]['url'] }}" alt="No image">
+                <strong>{{ item['track']['name'] }}</strong> by
+                {% for artist in item['track']['artists'] %}
+                    {{ artist['name'] }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </li>
+        {% endfor %}
+        </ul>
+</body>
+</html>
